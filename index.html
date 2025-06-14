@@ -401,6 +401,14 @@
   /* border-radius: 50%; */
 }
 
+.fade-img {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.fade-img.loading {
+  opacity: 0.3; /* 전환 중엔 흐리게 */
+}
 
 
 </style>
@@ -887,9 +895,23 @@ body {
     const keys = Object.keys(item);
 
 
-    if (mainImg) mainImg.src = item.s_url;
-    if (magnifierBox) magnifierBox.src = item.url;
-      console.log(item.url);
+     if (mainImg) mainImg.src = item.s_url;
+    // if (magnifierBox) magnifierBox.src = item.url;
+      //console.log(item.url);
+
+
+        // ✅ STEP 1: 저화질 이미지 먼저 표시
+  magnifierBox.classList.add('loading');
+  magnifierBox.src = item.s_url;
+
+  // ✅ STEP 2: 고화질 이미지 미리 로드
+  const highRes = new Image();
+  highRes.onload = () => {
+    // ✅ STEP 3: 부드럽게 전환
+    magnifierBox.src = item.url;
+    magnifierBox.classList.remove('loading');
+  };
+  highRes.src = item.url;
 
 
      // ✅ 예시: 버튼 클릭 시 실행
