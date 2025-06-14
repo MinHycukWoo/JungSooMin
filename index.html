@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>정수민작가 - 동양화 전시회</title>
+
+  <!-- intro -->
+
+
+  <style>
+    #main-image-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* #image-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  justify-items: center;
+
+  width: 100%;        
+  height: fit-content; 
+  box-sizing: border-box;
+} */
+
+
+#image-selector {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: auto;
+  grid-auto-flow: row; /* ✅ 줄 단위로 자연스럽게 배치 */
+  justify-content: center;      /* ✅ 가운데 정렬 */
+  gap: 0;                        /* ✅ 이미지 간 여백 제거 */
+  padding-top : 50px;
+  padding-bottom: 50px;
+}
+
+
+
+#image-selector img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}
+
+
+#main-image-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.image-text-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 70vh; /* 전체 높이 설정 */
+}
+
+
+
+#main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 공간을 꽉 채움 (가로+세로) */
+  border-radius: 0; /* 필요 시 조정 */
+}
+
+#image-detail {
+  width: 50%;
+  padding: 20px;
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 1.6;
+  color: white;
+  background-color: black; /* 배경 보이게 */
+}
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      padding: 0 20px;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .menu {
+      font-size: 1em;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #000;
+      color: #ccc;
+    }
+    header {
+      height: 50px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: transparent;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      z-index: 999;
+    }
+    
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+    }
+    main {
+      height: 100dvh;
+      overflow-y: auto;
+      
+    }
+    section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 40px 20px;
+      height: 100dvh;
+      box-sizing: border-box;
+    }
+   
+    .divider {
+      margin: 30px 0;
+    }
+    .image-section img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+      margin: auto;
+      border-radius: 8px;
+    }
+
+    
+      .footer-section {
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+        .footer-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .footer-columns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    .footer-col {
+      flex: 1;
+      min-width: 150px;
+      margin: 10px;
+    }
+    .footer-col h3 {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-col li {
+      margin-bottom: 8px;
+      font-size: 0.9em;
+      color: #fff;
+    }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 1.5em;
+    }
+</style>
+
+
+<style>
+.artwork-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+  max-width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #b1acac;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 280px;
+  flex-shrink: 0;
+}
+
+.info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  width: 300px; /* ✨ 고정 너비 추가 */
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.label {
+  font-size: 0.65em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-bottom: -5px;
+  width: 100%;
+  color : #1c1a1a;
+}
+
+.label.align-left {
+  text-align: left;
+}
+
+.label.align-right {
+  text-align: right;
+}
+
+.info-value {
+  border: 2px solid #fff1f161;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color : #371616;
+}
+</style>
+
+
+<style>
+
+#zoomInOut{
+  width: 100vw;
+  height: 100vh;
+}
+
+.image-box {
+  /* width: 50%; */
+  height: 100%;
+  overflow: hidden;
+  max-width: 70vw;
+  max-height: 80vh;     /* 살짝 높여서 이미지 공간 확보 */
+  padding: 20px;        /* 여백 줄임 */
+  border: 2px solid #fff1f161;
+  background-color: rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.image-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0;             /* 혹시 있을 여백 제거 */
+  padding: 0;
+
+   /* ✨ 그림자 추가 */
+   box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+</style>
+
+<style>
+.img_wrap {
+  width: 100vw;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center; /* ✅ 이미지 중앙 정렬을 위한 핵심 */
+}
+
+.img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+/* 이미지 자체에 display:block을 주고 margin: 0 auto 도 가능 */
+.img img {
+  display: inline-block; /* text-align: center와 함께 */
+  max-width: 90%;
+  height: auto;
+}
+
+.magnifier {
+  display: none;
+  position: absolute;
+  width: 400px; /* ✅ 더 크게 */
+  height: 400px;
+  /* border-radius: 50%; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.magnifier::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 4px solid #fff;
+  /* border-radius: 50%; */
+}
+
+
+
+</style>
+
+<!-- intro -->
+<style>
+
+body {
+  background: #0d0d0d;
+  color: #f1f1f1;
+  font-family: 'Orbitron', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.neon-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  padding: 80px 40px;
+  margin: auto;
+  gap: 60px;
+}
+
+.text-content {
+  max-width: 600px;
+}
+
+.neon-intro h5 {
+  font-size: 0.9rem;
+  color: #00ffd9;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.neon-intro h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.neon-intro .highlight {
+  color: #00ffd9;
+}
+
+.neon-intro .tagline {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+.neon-intro .desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.artworks p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+.artworks strong {
+  color: #00ffd9;
+}
+
+.image-box img {
+  width: 350px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 255, 217, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.image-box img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 45px rgba(0, 255, 217, 0.8);
+}
+
+</style>
+
+
+<!-- 00:00:00 clock -->
+
+<style>
+.slot-clock {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  color: #00ffd9;
+  display: flex;
+  justify-content: center;
+  gap: 0.1em;
+  text-shadow: 0 0 10px #00ffd9;
+}
+
+.slot-clock .digit,
+.slot-clock .colon,
+.slot-clock .dot {
+  width: 1ch;
+  display: inline-block;
+  text-align: center;
+}
+
+.slot-clock .colon {
+  color: #666;
+}
+
+.slot-clock .dot {
+  color: #666;
+}
+</style>
+
+
+
+<!-- 360도 타임랩스 -->
+<style>
+#image360-container {
+  width: 100vw;
+  height: 40vw;
+  max-width: 100%;
+  position: relative;
+  display: inline-block; 
+}
+
+
+#image360 {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+</style>
+
+<style>
+.trail {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background: url('./river/river.PNG') no-repeat center center;
+  background-size: cover;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: transform 0.1s linear;
+}
+
+</style>
+
+</head>
+<body>
+  <header id="page-header">
+    <div class="header-inner">
+      <div class="logo">Ewha Womans University</div>
+      <nav class="menu">Jung SooMin</nav>
+    </div>
+  </header>
+
+
+<main id="main">
+    <section class="neon-intro">
+      <div class="text-content">
+        <h5>EWHA UNIVERSITY | DEPT. OF EASTERN STUDIES</h5>
+        <h1><span class="highlight">정수민</span> 작가</h1>
+        <p class="tagline">나의 시간과 노동을 기록하다</p>
+        <p class="desc">
+          이 연작은 정수민 작가가 시간의 흐름과 노동의 흔적을<br>
+          캔버스 위에 고스란히 남긴 결과물이다.
+        </p>
+
+        <div class="artworks">
+          <p><strong>연구-1</strong> (2024) | 72.7 × 60.6cm</p>
+          <p><strong>32:04:40.73</strong> (2025) | 60 × 91cm</p>
+          <p><strong>125</strong> (2025) | 193.9 × 130.3cm</p>
+          <p><strong>36:56:36.53</strong> (2025) | 한지에 채색 | 60 × 91cm</p>
+          <p><strong>소용돌이</strong> (2025) | 60 × 91cm</p>
+        </div>
+
+        <p class="desc">
+          작가는 수치화된 시간과 물리적 기록을 통해,<br>
+          반복적이면서도 고유한 자신의 노동을 시각적으로 증명한다.
+        </p>
+      </div>
+
+  <div class="image-box">
+    <img src="./image/image1.png" alt="정수민 작가 이미지">
+  </div>
+</section>
+
+    <!-- <section class="image-gallery" id="image-selector" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; padding: 20px; justify-items: center;"> -->
+      <div class="image-gallery" id="image-selector">  
+      <!-- 이미지 셀렉터는 스크립트로 자동 생성됩니다 -->
+    </div>
+
+
+<div class="slot-clock" id="slotClock"></div>
+
+
+<!-- 시작 -->
+
+<div class="artwork-container">
+  <!-- 왼쪽 정보 -->
+  <div class="info-box left" id="info-box-left">
+    <div class="info-wrapper">
+      <span class="label align-right">HARDWARE</span>
+      <div class="info-value">SAMSUNG THE FRAME QLED 4K 65" TV<br />CUSTOM MINI COMPUTER</div>
+    </div>
+    <div class="info-wrapper">
+      <span class="label align-right">DIMENSIONS</span>
+      <div class="info-value">(W × H × D) : 58" × 33" × 3"</div>
+    </div>
+    <div class="info-wrapper">
+      <span class="label align-right">RESOLUTION</span>
+      <div class="info-value">3840 × 2160PX 4K</div>
+    </div>
+  </div>
+
+  <!-- 중앙 이미지 -->
+  <div class="image-box" >
+    <img src="./image/image1.png" alt="Artwork" id="main-image"/>
+  </div>
+
+  <!-- 오른쪽 정보 -->
+  <div class="info-box right" id="info-box-right">
+    <div class="info-wrapper">
+      <span class="label align-left">DURATION</span>
+      <div class="info-value">16 MINUTES</div>
+    </div>
+    <div class="info-wrapper">
+      <span class="label align-left">SOUND</span>
+      <div class="info-value">STEREO SOUNDTRACK</div>
+    </div>
+    <div class="info-wrapper">
+      <span class="label align-left">MEDIA FILE</span>
+      <div class="info-value">ENCRYPTED APPLE PRORES 422</div>
+    </div>
+  </div>
+</div>
+
+    <!-- 끝 -->
+
+   
+      <div class="img_wrap">
+        <div class="img">
+          <img src="./image/image1.png" alt="이미지" id = "magnifier-box">
+          <span class="magnifier" ></span>
+        </div>
+      </div>
+
+
+       <!-- 360도 뷰 시작 -->
+    <!-- <div id="image360-container">
+      <img id="image360" src="./image360/common01.png" alt="360도 이미지" />
+    </div> -->
+
+    <!-- 360도 뷰 끝 -->
+
+
+    <!-- 흘러가는 잔상 시작 -->
+
+      <!-- <div id="container">
+
+      </div> -->
+
+     <!-- 흘러가는 잔상 끝 -->
+
+
+    
+    <footer id="page-footer">
+  <div class="footer-container">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3>LOGO</h3>
+        <p>SOLOGAN COMPANY</p>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li>WEEBLY THEMES</li>
+          <li>PRE-SALE FAQS</li>
+          <li>SUBMIT A TICKET</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li>SERVICES</li>
+          <li>THEME TWEAK</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li>SHOWCASE</li>
+          <li>WIDGETKIT</li>
+          <li>SUPPORT</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li>ABOUT US</li>
+          <li>CONTACT US</li>
+          <li>AFFILIATES</li>
+          <li>RESOURCES</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top: 10px; font-size: 0.8em;">©Copyright. All rights reserved.</p>
+  </div>
+
+ 
+
+</footer>
+      <button id="scrollTopBtn" style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: white; color: black; border: none; border-radius: 50%; cursor: pointer; z-index: 1000; font-size: 24px; line-height: 0; display: flex; align-items: center; justify-content: center;">↑</button>
+</main>
+
+  
+<script>
+  
+  const items = [
+      {
+        Title: '99:99:99.99',
+        Artist: '정수민',
+        Year: '2025',
+        Medium: 'Oil on canvas',
+        Dimensions: '73.7 × 92.1 cm (29 × 36¼ inches)',
+        Location: 'Museum of Modern Art (MoMA), New York, USA',
+        Description: '“Van Gogh’s Starry Night is a masterpiece depicting a dreamy interpretation of a night sky with swirling clouds, vibrant stars, and a quiet village below. It is renowned for its expressive use of color and emotional intensity.”',
+        url: './image/image1.png',
+        Horizontal: true
+      },
+      {
+        Title: '88:88:88.88',
+        Artist: '정수민',
+        Year: '2025',
+        Medium: 'Oil on canvas',
+        Dimensions: '73.7 × 92.1 cm (29 × 36¼ inches)',
+        Location: 'Museum of Modern Art (MoMA), New York, USA',
+        Description: '“Van Gogh’s Starry Night is a masterpiece depicting a dreamy interpretation of a night sky with swirling clouds, vibrant stars, and a quiet village below. It is renowned for its expressive use of color and emotional intensity.”',
+        url: './image/image2.png',
+        Horizontal: true
+      },
+      {
+        Title: '77:77:77.77',
+        Artist: '정수민',
+        Year: '2025',
+        Medium: 'Oil on canvas',
+        Dimensions: '73.7 × 92.1 cm (29 × 36¼ inches)',
+        Location: 'Museum of Modern Art (MoMA), New York, USA',
+        Description: '“Van Gogh’s Starry Night is a masterpiece depicting a dreamy interpretation of a night sky with swirling clouds, vibrant stars, and a quiet village below. It is renowned for its expressive use of color and emotional intensity.”',
+        url: './image/image3.png',
+        Horizontal: true
+      },
+      {
+        Title: '66:66:66.66',
+        Artist: '정수민',
+        Year: '2025',
+        Medium: 'Oil on canvas',
+        Dimensions: '73.7 × 92.1 cm (29 × 36¼ inches)',
+        Location: 'Museum of Modern Art (MoMA), New York, USA',
+        Description: '“Van Gogh’s Starry Night is a masterpiece depicting a dreamy interpretation of a night sky with swirling clouds, vibrant stars, and a quiet village below. It is renowned for its expressive use of color and emotional intensity.”',
+        url: './image/image4.png',
+        Horizontal: false
+      },
+      {
+        Title: '55:55:55.55',
+        Artist: '정수민',
+        Year: '2025',
+        Medium: 'Oil on canvas',
+        Dimensions: '73.7 × 92.1 cm (29 × 36¼ inches)',
+        Location: 'Museum of Modern Art (MoMA), New York, USA',
+        Description: '“Van Gogh’s Starry Night is a masterpiece depicting a dreamy interpretation of a night sky with swirling clouds, vibrant stars, and a quiet village below. It is renowned for its expressive use of color and emotional intensity.”',
+        url: './image/image5.png',
+        Horizontal: true
+      },
+      {
+        Title: '44:44:44.44',
+        Artist: '정수민',
+        Year: '2025',
+        Medium: 'Oil on canvas',
+        Dimensions: '73.7 × 92.1 cm (29 × 36¼ inches)',
+        Location: 'Museum of Modern Art (MoMA), New York, USA',
+        Description: '“Van Gogh’s Starry Night is a masterpiece depicting a dreamy interpretation of a night sky with swirling clouds, vibrant stars, and a quiet village below. It is renowned for its expressive use of color and emotional intensity.”',
+        url: './image/image6.png',
+        Horizontal: false
+      },
+      {
+        Title: '133:33:33.33',
+        Artist: '정수민',
+        Year: '2025',
+        Medium: 'Oil on canvas',
+        Dimensions: '73.7 × 92.1 cm (29 × 36¼ inches)',
+        Location: 'Museum of Modern Art (MoMA), New York, USA',
+        Description: '“Van Gogh’s Starry Night is a masterpiece depicting a dreamy interpretation of a night sky with swirling clouds, vibrant stars, and a quiet village below. It is renowned for its expressive use of color and emotional intensity.”',
+        url: './image/image7.png',
+        Horizontal: false
+      },
+      {
+        Title: '22:22:22.22',
+        Artist: '정수민',
+        Year: '2025',
+        Medium: 'Oil on canvas',
+        Dimensions: '73.7 × 92.1 cm (29 × 36¼ inches)',
+        Location: 'Museum of Modern Art (MoMA), New York, USA',
+        Description: '“Van Gogh’s Starry Night is a masterpiece depicting a dreamy interpretation of a night sky with swirling clouds, vibrant stars, and a quiet village below. It is renowned for its expressive use of color and emotional intensity.”',
+        url: './image/image8.png',
+        Horizontal: false
+      }
+    ];
+  
+  </script>
+
+<script type="module">
+  // 리모컨 클릭 시 부드럽게 스크롤
+  // TOP 버튼 클릭 시 페이지 맨 위로 부드럽게 이동
+  document.getElementById('scrollTopBtn').addEventListener('click', () => {
+    document.getElementById('main').scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  
+</script>
+
+
+<!-- 2. 그다음 items를 활용하는 코드 -->
+<script>
+  const selector = document.getElementById('image-selector');
+  // items.forEach(item => {
+  //   const img = document.createElement('img');
+  //   img.src = item.url;
+  //   img.style.width = '100%';
+  //   img.style.cursor = 'pointer';
+  //   img.style.borderRadius = '6px';
+  //   img.onclick = () => changeMainImage(item);
+  //   selector.appendChild(img);
+  // });
+
+  items.forEach(item => {
+  const wrapper = document.createElement('div');
+  wrapper.style.width = '100%';
+  wrapper.style.aspectRatio = '1 / 1'; // 정사각형 비율
+  wrapper.style.overflow = 'hidden';
+  wrapper.style.borderRadius = '6px';
+
+  const img = document.createElement('img');
+  img.src = item.url;
+  img.style.width = '100%';
+  img.style.height = '100%';
+  img.style.objectFit = 'cover'; // 이미지가 부모 요소를 꽉 채움
+  img.style.cursor = 'pointer';
+
+  img.onclick = () => changeMainImage(item);
+
+  wrapper.appendChild(img);
+  selector.appendChild(wrapper);
+});
+
+
+  function changeMainImage(item) {
+    const mainImg = document.getElementById('main-image');
+
+    const magnifierBox = document.getElementById('magnifier-box');
+    
+
+    const detailBoxLeft = document.getElementById('info-box-left');
+    const detailBoxRight = document.getElementById('info-box-right');
+
+
+    const keys = Object.keys(item);
+
+
+      if (magnifierBox) magnifierBox.src = item.url;
+      if (mainImg) mainImg.src = item.url;
+      console.log(item.url);
+
+
+     // ✅ 예시: 버튼 클릭 시 실행
+  // ✅ 사용 예시: 클릭 시 실행
+// document.addEventListener('click', () => {
+
+//   SlotClock.start(item.Title);
+// });
+SlotClock.start(item.Title);
+
+    if (detailBoxLeft) {
+      detailBoxLeft.innerHTML = `
+
+        <div class="info-wrapper">
+          <span class="label align-right">${keys[3]}</span>
+          <div class="info-value">${item.Medium}</div>
+        </div>
+
+        <div class="info-wrapper">
+          <span class="label align-right">${keys[4]}</span>
+          <div class="info-value">${item.Dimensions}</div>
+        </div>
+
+        <div class="info-wrapper">
+          <span class="label align-right">${keys[5]}</span>
+          <div class="info-value">${item.Location}</div>
+        </div>
+
+      `;
+    }
+    if (detailBoxRight) {
+      detailBoxRight.innerHTML = `
+
+        <div class="info-wrapper">
+          <span class="label align-left">${keys[0]}</span>
+          <div class="info-value">${item.Title}</div>
+        </div>
+
+        <div class="info-wrapper">
+          <span class="label align-left">${keys[1]}</span>
+          <div class="info-value">${item.Artist}</div>
+        </div>
+
+        <div class="info-wrapper">
+          <span class="label align-left">${keys[2]}</span>
+          <div class="info-value">${item.Year}</div>
+        </div>
+      `;
+    }
+  }
+</script>
+
+<script>
+
+$(document).ready(function () {
+  const zoomFactor = 1.5; // ✅ 확대 배율
+
+  $(".img").each(function () {
+    const imageTarget = $(this).find('img');
+    const magnifierDiv = $(this).find('.magnifier');
+
+    function magnify(e) {
+      const offset = imageTarget.offset();
+      const mousePosX = e.pageX - offset.left;
+      const mousePosY = e.pageY - offset.top;
+
+      const imgWidth = imageTarget.width();
+      const imgHeight = imageTarget.height();
+      
+
+      // 이미지 영역 내에 마우스가 있는 경우에만 확대
+      if (mousePosX >= 0 && mousePosY >= 0 && mousePosX <= imgWidth && mousePosY <= imgHeight) {
+        magnifierDiv.fadeIn(100);
+      } else {
+        magnifierDiv.fadeOut(100);
+      }
+
+      if (magnifierDiv.is(":visible")) {
+        const bgPosX = -(mousePosX * zoomFactor - magnifierDiv.width() / 2);
+        const bgPosY = -(mousePosY * zoomFactor - magnifierDiv.height() / 2);
+        const magnifierPosX = mousePosX + offset.left - $(this).offset().left - magnifierDiv.width() / 2;
+        const magnifierPosY = mousePosY + offset.top - $(this).offset().top - magnifierDiv.height() / 2;
+
+        magnifierDiv.css({
+          "left": magnifierPosX,
+          "top": magnifierPosY,
+          "background-image": `url('${imageTarget.attr("src")}')`,
+          "background-repeat": "no-repeat",
+          "background-size": `${imgWidth * zoomFactor}px ${imgHeight * zoomFactor}px`,
+          "background-position": `${bgPosX}px ${bgPosY}px`
+        });
+      }
+    }
+
+    $(this).on('mousemove', magnify);
+  });
+});
+</script>
+
+<script>
+// const container360 = document.getElementById('image360-container');
+// const image = document.getElementById('image360');
+
+// const totalFrames = 36; // 전체 이미지 수
+// let currentFrame = 1;   // 현재 프레임
+// let isActive = false;   // ✅ 클릭으로 토글되는 활성 상태
+// let lastX = 0;
+
+// // 이미지 로드 함수
+// function loadImage(frame) {
+//   const frameNumber = String(frame).padStart(2, '0');
+//   image.src = `./image360/common${frameNumber}.png`;
+// }
+
+// ✅ 클릭으로 회전 활성/비활성 토글
+// container360.addEventListener('click', (e) => {
+//   isActive = !isActive;
+//   lastX = e.clientX;
+// });
+
+// ✅ 마우스 이동 시 회전 처리 (isActive 상태일 때만)
+// window.addEventListener('mousemove', (e) => {
+//   if (!isActive) return;
+
+//   const dx = e.clientX - lastX;
+//   lastX = e.clientX;
+
+//   if (dx > 5) {
+//     currentFrame = (currentFrame % totalFrames) + 1;
+//     loadImage(currentFrame);
+//   } else if (dx < -5) {
+//     currentFrame = (currentFrame - 2 + totalFrames) % totalFrames + 1;
+//     loadImage(currentFrame);
+//   }
+// });
+
+// // ✅ 마우스 휠로도 회전 (항상 가능)
+// container.addEventListener('wheel', (e) => {
+//   if (e.deltaY > 0) {
+//     currentFrame = (currentFrame % totalFrames) + 1;
+//   } else {
+//     currentFrame = (currentFrame - 2 + totalFrames) % totalFrames + 1;
+//   }
+//   loadImage(currentFrame);
+// });
+
+// 초기 이미지 로드
+// loadImage(currentFrame);
+
+
+// const images = [];
+// for (let i = 1; i <= totalFrames; i++) {
+//   const img = new Image();
+//   const frameNumber = String(i).padStart(2, '0');
+//   img.src = `./image360/common${frameNumber}.png`;
+//   images.push(img);
+// }
+
+</script>
+
+
+<script>
+// JS
+const container = document.getElementById("container");
+const trailCount = 10;
+const trails = [];
+
+for (let i = 0; i < trailCount; i++) {
+  const el = document.createElement("div");
+  el.classList.add("trail");
+  container.appendChild(el);
+  trails.push({ el, x: 0, y: 0 });
+}
+
+let mouseX = 0, mouseY = 0;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+// function animate() {
+//   let x = mouseX, y = mouseY;
+//   trails.forEach((trail, index) => {
+//     const dx = (x - trail.x) * 0.3;
+//     const dy = (y - trail.y) * 0.3;
+//     trail.x += dx;
+//     trail.y += dy;
+//     trail.el.style.transform = `translate(${trail.x}px, ${trail.y}px)`;
+//     x = trail.x;
+//     y = trail.y;
+//   });
+
+//   requestAnimationFrame(animate);
+// }
+// animate();
+
+
+</script>
+
+
+<script>
+const SlotClock = (() => {
+  const CLOCK_ID = 'slotClock';
+  let runningIntervals = [];
+
+  function clearPreviousIntervals() {
+    runningIntervals.forEach(clearInterval);
+    runningIntervals = [];
+  }
+
+  function renderClock(targetStr) {
+    const cleanTarget = targetStr.replace(/[^0-9]/g, '');
+    const hasMillis = /\.\d{1,2}$/.test(targetStr); // 소수점 있는지
+    const hasTripleHour = /^(\d{3,}):/.test(targetStr); // 세 자리 시간인지
+
+    const parts = targetStr.split(/[:.]/); // 시간/분/초/밀리초 분리
+    const digitsNeeded = cleanTarget.length;
+
+    const container = document.getElementById(CLOCK_ID);
+    container.innerHTML = ''; // 기존 내용 제거
+
+    // 시간 자리수에 따라 동적 생성
+    let digitIndex = 0;
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i];
+      for (let j = 0; j < part.length; j++) {
+        const span = document.createElement('span');
+        span.classList.add('digit');
+        span.textContent = '0';
+        container.appendChild(span);
+        digitIndex++;
+      }
+
+      // 구분자 삽입
+      if (i < parts.length - 1) {
+        const sep = document.createElement('span');
+        sep.textContent = i === 2 ? '.' : ':'; // 소수점이면 .
+        sep.className = i === 2 ? 'dot' : 'colon';
+        container.appendChild(sep);
+      }
+    }
+  }
+
+  function resetDigits() {
+    const digits = document.querySelectorAll(`#${CLOCK_ID} .digit`);
+    digits.forEach(d => d.textContent = '0');
+  }
+
+  function animateDigits(targetStr) {
+    clearPreviousIntervals();
+    renderClock(targetStr); // ✅ 동적 시계 재구성
+    resetDigits();
+
+    const digits = document.querySelectorAll(`#${CLOCK_ID} .digit`);
+    const cleanTarget = targetStr.replace(/[^0-9]/g, '');
+    let completedCount = 0;
+
+    digits.forEach((digitEl, index) => {
+      const finalDigit = cleanTarget.charAt(index) || "0";
+      let count = 0;
+
+      const interval = setInterval(() => {
+        digitEl.textContent = Math.floor(Math.random() * 10);
+        count++;
+
+        if (count > 15 + index * 2) {
+          clearInterval(interval);
+          digitEl.textContent = finalDigit;
+
+          completedCount++;
+        }
+      }, 30);
+
+      runningIntervals.push(interval);
+    });
+  }
+
+  return {
+    start: (targetTimeStr) => animateDigits(targetTimeStr)
+  };
+})();
+</script>
+<!-- <div class="info-wrapper">
+  <span class="label align-right">HARDWARE</span>
+  <div class="info-value">SAMSUNG THE FRAME QLED 4K 65" TV<br />CUSTOM MINI COMPUTER</div>
+</div> -->
+
+</body>
+</html>
